@@ -11,7 +11,7 @@ n_nodes_hl1 = 500
 n_nodes_hl2 = 500
 n_nodes_hl3 = 500
 
-n_classes = 10
+n_classes = 2
 batch_size = 100
 
 # 784 values (pixels)
@@ -46,6 +46,7 @@ def neural_network_model(data):
 def train_neural_network(x):
     predicition = neural_network_model(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=predicition,labels=y))
+    tf.nn.
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
