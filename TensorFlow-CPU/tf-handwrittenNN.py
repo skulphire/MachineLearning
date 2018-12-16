@@ -49,7 +49,7 @@ def train_neural_network(x):
 
     hm_epochs = 10
 
-    with tf.Session as ses:
+    with tf.Session() as ses:
         ses.run(tf.initialize_all_variables())
 
         for epoch in range(hm_epochs):
