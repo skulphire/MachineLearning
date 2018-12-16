@@ -1,8 +1,8 @@
 import tensorflow as tf
-from TensorFlowCPU.posneg import create_featureset_and_lables
+from posneg import create_featureset_and_labels
 import numpy as np
 
-train_x,train_y,test_x,test_y = create_featureset_and_lables('/home/ckinney/MachineLearning/Datasets/PosNeg_pt5/pos.txt','/home/ckinney/MachineLearning//Datasets/PosNeg_pt5/neg.txt')
+train_x,train_y,test_x,test_y = create_featureset_and_labels('/home/ckinney/MachineLearning/Datasets/PosNeg_pt5/pos.txt', '/home/ckinney/MachineLearning//Datasets/PosNeg_pt5/neg.txt')
 
 
 #10 classes, 0-9
