@@ -7,9 +7,9 @@ train_x,train_y,test_x,test_y = create_featureset_and_labels('/home/ckinney/Mach
 
 #10 classes, 0-9
 
-n_nodes_hl1 = 1000
-n_nodes_hl2 = 1000
-n_nodes_hl3 = 500
+n_nodes_hl1 = 1500
+n_nodes_hl2 = 1500
+n_nodes_hl3 = 1500
 
 n_classes = 2
 batch_size = 50
@@ -50,7 +50,7 @@ def train_neural_network(x):
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 25
+    hm_epochs = 50
 
     with tf.Session() as ses:
         ses.run(tf.initialize_all_variables())
