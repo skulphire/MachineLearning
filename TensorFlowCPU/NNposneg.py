@@ -50,7 +50,7 @@ def train_neural_network(x):
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 10
+    hm_epochs = 25
 
     with tf.Session() as ses:
         ses.run(tf.initialize_all_variables())
@@ -68,7 +68,7 @@ def train_neural_network(x):
                 epoch_loss+=c
                 i+=batch_size
 
-            print('epoch ',epoch, 'completed out of', hm_epochs, ' loss:',epoch_loss)
+            print('epoch ',epoch+1, 'completed out of', hm_epochs, ' loss:',epoch_loss)
 
         correct = tf.equal(tf.arg_max(predicition,1),tf.arg_max(y,1))
         accuracy = tf.reduce_mean(tf.cast(correct,'float'))
