@@ -63,10 +63,10 @@ def train_neural_network(x):
                 end = i+batch_size
                 batch_x = np.array(train_x[start:end])
                 batch_y = np.array(train_y[start:end])
-
-
-                _, c = ses.run([optimizer,cost],feed_dict={x:epoch_x,y:epoch_y})
+                _, c = ses.run([optimizer,cost],feed_dict={x:batch_x,y:batch_y})
                 epoch_loss+=c
+                i+=batch_size
+
             print('epoch ',epoch, 'completed out of', hm_epochs, ' loss:',epoch_loss)
 
         correct = tf.equal(tf.arg_max(predicition,1),tf.arg_max(y,1))
