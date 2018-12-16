@@ -28,13 +28,13 @@ def neural_network_model(data):
     outputlayer = {'weights': tf.Variable(tf.random_normal([n_nodes_hl3, n_classes])),
                     'biases': tf.Variable(tf.random_normal(n_classes))}
 
-    L1 = tf.add(tf.matmul(data,hiddenlayer1['weights']) + hiddenlayer1['biases'])
+    L1 = tf.add(tf.matmul(data,hiddenlayer1['weights']), hiddenlayer1['biases'])
     L1 = tf.nn.relu(L1)
 
-    L2 = tf.add(tf.matmul(L1, hiddenlayer2['weights']) + hiddenlayer2['biases'])
+    L2 = tf.add(tf.matmul(L1, hiddenlayer2['weights']),hiddenlayer2['biases'])
     L2 = tf.nn.relu(L2)
 
-    L3 = tf.add(tf.matmul(L2, hiddenlayer3['weights']) + hiddenlayer3['biases'])
+    L3 = tf.add(tf.matmul(L2, hiddenlayer3['weights']), hiddenlayer3['biases'])
     L3 = tf.nn.relu(L3)
 
     Loutput = tf.matmul(L3, outputlayer['weights']) + outputlayer['biases']
@@ -55,8 +55,8 @@ def train_neural_network(x):
         for epoch in hm_epochs:
             epoch_loss = 0
             for _ in range(int(mnist.train.num_examples/batch_size)):
-                x, y = mnist.train.next_batch(batch_size)
-                _, c = ses.run([optimizer,cost],feed_dict={x:x,y:y})
+                epoch_x, epoch_y = mnist.train.next_batch(batch_size)
+                _, c = ses.run([optimizer,cost],feed_dict={x:epoch_x,y:epoch_y})
                 epoch_loss+=c
             print('epoch ',epoch, 'completed out of', hm_epochs, ' loss:',epoch_loss)
 
