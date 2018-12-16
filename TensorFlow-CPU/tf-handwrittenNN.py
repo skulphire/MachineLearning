@@ -20,13 +20,13 @@ def neural_network_model(data):
     # input data * weights + bias
 
     hiddenlayer1 = {'weights': tf.Variable(tf.random_normal([784, n_nodes_hl1])),
-                    'biases': tf.Variable(tf.random_normal(n_nodes_hl1))}
+                    'biases': tf.Variable(tf.random_normal([n_nodes_hl1]))}
     hiddenlayer2 = {'weights': tf.Variable(tf.random_normal([n_nodes_hl1, n_nodes_hl2])),
-                    'biases': tf.Variable(tf.random_normal(n_nodes_hl2))}
+                    'biases': tf.Variable(tf.random_normal([n_nodes_hl2]))}
     hiddenlayer3= {'weights': tf.Variable(tf.random_normal([n_nodes_hl2, n_nodes_hl3])),
-                    'biases': tf.Variable(tf.random_normal(n_nodes_hl3))}
+                    'biases': tf.Variable(tf.random_normal([n_nodes_hl3]))}
     outputlayer = {'weights': tf.Variable(tf.random_normal([n_nodes_hl3, n_classes])),
-                    'biases': tf.Variable(tf.random_normal(n_classes))}
+                    'biases': tf.Variable(tf.random_normal([n_classes]))}
 
     L1 = tf.add(tf.matmul(data,hiddenlayer1['weights']), hiddenlayer1['biases'])
     L1 = tf.nn.relu(L1)
