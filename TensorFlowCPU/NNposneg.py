@@ -1,14 +1,14 @@
 import tensorflow as tf
-
+from TensorFlowCPU.posneg import create_featureset_and_lables
 
 #10 classes, 0-9
 
-n_nodes_hl1 = 700
-n_nodes_hl2 = 700
+n_nodes_hl1 = 500
+n_nodes_hl2 = 500
 n_nodes_hl3 = 500
 
 n_classes = 10
-batch_size = 200
+batch_size = 100
 
 # 784 values (pixels)
 x = tf.placeholder('float')
@@ -45,7 +45,7 @@ def train_neural_network(x):
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 100
+    hm_epochs = 10
 
     with tf.Session() as ses:
         ses.run(tf.initialize_all_variables())
