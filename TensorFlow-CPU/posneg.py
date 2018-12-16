@@ -65,8 +65,7 @@ def create_featureset_and_lables(pos,neg,testsize=0.1):
     return  train_x,train_y,test_x,test_y
 
 if __name__ == '__main__':
-    train_x, train_y, test_x, test_y = create_featureset_and_lables
-        ('MachineLearning/Datasets/PosNeg_pt5/pos.txt','MachineLearning/Datasets/PosNeg_pt5/neg.txt')
+    train_x, train_y, test_x, test_y = create_featureset_and_lables('MachineLearning/Datasets/PosNeg_pt5/pos.txt','MachineLearning/Datasets/PosNeg_pt5/neg.txt')
     with open('posneg.pickle','wb') as f:
         pickle.dump([train_x, train_y, test_x, test_y],f)
 
