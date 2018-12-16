@@ -27,7 +27,7 @@ def create_lexitcon(pos,neg):
         #we dont care about common words, or rare words
         if 1000 > w_counts[w] > 50:
             l2.append(w)
-
+    print(len(l2))
     return l2
 
 def sample_handling(sample, lexicon, classification):
@@ -36,7 +36,7 @@ def sample_handling(sample, lexicon, classification):
         contents = f.readlines()
         for lne in contents[:hm_lines]:
             currentWords = word_tokenize(lne.lower())
-            currentWords = [lemmatizer.lemmatize(i for i in currentWords)]
+            currentWords = [lemmatizer.lemmatize(i) for i in currentWords]
             features = np.zeros(len(lexicon))
             for word in currentWords:
                 if word.lower() in lexicon:
