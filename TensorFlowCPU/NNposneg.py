@@ -7,12 +7,12 @@ train_x,train_y,test_x,test_y = create_featureset_and_labels('/home/ckinney/Mach
 
 #10 classes, 0-9
 
-n_nodes_hl1 = 1500
-n_nodes_hl2 = 1500
-n_nodes_hl3 = 1500
+n_nodes_hl1 = 1000
+n_nodes_hl2 = 1000
+n_nodes_hl3 = 1000
 
 n_classes = 2
-batch_size = 50
+batch_size = 25
 
 # 784 values (pixels)
 x = tf.placeholder('float')
