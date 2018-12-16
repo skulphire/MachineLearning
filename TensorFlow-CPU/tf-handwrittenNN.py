@@ -47,7 +47,7 @@ def train_neural_network(x):
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 100
+    hm_epochs = 10
 
     with tf.Session() as ses:
         ses.run(tf.initialize_all_variables())
