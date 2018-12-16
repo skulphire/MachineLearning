@@ -5,12 +5,12 @@ mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
 #10 classes, 0-9
 
-n_nodes_hl1 = 500
-n_nodes_hl2 = 500
-n_nodes_hl3 = 500
+n_nodes_hl1 = 1000
+n_nodes_hl2 = 1000
+n_nodes_hl3 = 1000
 
 n_classes = 10
-batch_size = 100
+batch_size = 200
 
 # 784 values (pixels)
 x = tf.placeholder('float')
@@ -47,7 +47,7 @@ def train_neural_network(x):
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 10
+    hm_epochs = 100
 
     with tf.Session() as ses:
         ses.run(tf.initialize_all_variables())
