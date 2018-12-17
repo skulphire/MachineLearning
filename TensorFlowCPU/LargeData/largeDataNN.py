@@ -47,7 +47,7 @@ tf_log = 'tf.log'
 
 def train_neural_network(x):
     prediction = neural_network_model(x)
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(prediction, y))
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction,labels=y))
     optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
     with tf.Session() as sess:
         sess.run(tf.initialize_all_variables())
