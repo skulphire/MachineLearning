@@ -46,11 +46,10 @@ tf_log = 'tf.log'
 
 
 def train_neural_network(x):
-    n_cpus = 20
     prediction = neural_network_model(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction,labels=y))
     optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
-    with tf.Session(config=tf.ConfigProto(device_count={ "CPU": n_cpus },inter_op_parallelism_threads=n_cpus, intra_op_parallelism_threads=2,)) as sess:
+    with tf.Session(config=tf.ConfigProto(inter_op_parallelism_threads=8, intra_op_parallelism_threads=8,)) as sess:
         sess.run(tf.initialize_all_variables())
         try:
             epoch = int(open(tf_log, 'r').read().split('\n')[-2]) + 1
