@@ -100,7 +100,7 @@ def train_neural_network(x):
                         batch_y = []
                         batches_run += 1
                         oldtime, remaining, w = estimated_time(batches_run,oldtime)
-                        print('Batch run:', batches_run, '/', total_batches,'|',w,'Remaining:',int(remaining),'| Epoch:', epoch, '| Batch Loss:', c, )
+                        print('Batch run:', batches_run, '/', total_batches,'|',w,'Remaining:',remaining,'| Epoch:', epoch, '| Batch Loss:', c, )
 
             saver.save(sess, "model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
