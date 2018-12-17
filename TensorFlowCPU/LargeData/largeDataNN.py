@@ -57,6 +57,12 @@ def train_neural_network(x):
         except:
             epoch = 1
 
+        count = 0
+        with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
+            for line in f:
+                count+=1
+        print(count)
+
         while epoch <= hm_epochs:
             if epoch != 1:
                 saver.restore(sess, "model.ckpt")
@@ -91,7 +97,7 @@ def train_neural_network(x):
                         batch_x = []
                         batch_y = []
                         batches_run += 1
-                        print('Batch run:', batches_run, '/', total_batches, '| length batchx: ',len(batch_x),'| Epoch:', epoch, '| Batch Loss:', c, )
+                        print('Batch run:', batches_run, '/', total_batches,'| Epoch:', epoch, '| Batch Loss:', c, )
 
             saver.save(sess, "model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
