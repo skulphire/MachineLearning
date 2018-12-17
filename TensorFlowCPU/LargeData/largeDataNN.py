@@ -12,8 +12,8 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 
-batch_size = 32
-total_batches = int(1600000 / batch_size) #1600000
+batch_size =600
+total_batches = int(4800000 / batch_size) #1600000
 hm_epochs = 10
 
 x = tf.placeholder('float')
@@ -57,11 +57,11 @@ def train_neural_network(x):
         except:
             epoch = 1
 
-        count = 0
-        with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
-            for line in f:
-                count+=1
-        print(count)
+        # count = 0
+        # with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
+        #     for line in f:
+        #         count+=1
+        # print(count)
 
         while epoch <= hm_epochs:
             if epoch != 1:
