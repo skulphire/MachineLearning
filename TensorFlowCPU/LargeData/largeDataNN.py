@@ -112,7 +112,7 @@ def estimated_time(count,oldtime):
     time = datetime.datetime.now().time()
     e1 = int(time.second)
     e2 = int(oldtime.second)
-    timeDif = abs(e1-e2)
+    timeDif = abs(e1-e2)+1
     totalLeft = abs(count-total_batches)
     estimate = timeDif*totalLeft
     minutes = estimate / 60
