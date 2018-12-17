@@ -61,7 +61,7 @@ def create_lexicon(fin):
         except Exception as e:
             print(str(e))
 
-    with open('lexicon-2500-2638.pickle', 'wb') as f:
+    with open('lexicon.pickle', 'wb') as f:
         pickle.dump(lexicon, f)
 
 
