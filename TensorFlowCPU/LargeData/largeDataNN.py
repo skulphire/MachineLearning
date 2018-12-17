@@ -4,6 +4,7 @@ import numpy as np
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+import datetime
 
 lemmatizer = WordNetLemmatizer()
 
@@ -73,6 +74,7 @@ def train_neural_network(x):
                 batch_x = []
                 batch_y = []
                 batches_run = 0
+                oldtime = datetime.datetime.now()
                 for line in f:
                     label = line.split(':::')[0]
                     tweet = line.split(':::')[1]
@@ -97,7 +99,8 @@ def train_neural_network(x):
                         batch_x = []
                         batch_y = []
                         batches_run += 1
-                        print('Batch run:', batches_run, '/', total_batches,'| Epoch:', epoch, '| Batch Loss:', c, )
+                        oldtime, remaining = estimated_time(batches_run,oldtime)
+                        print('Batch run:', batches_run, '/', total_batches,'|Time Remaining:',remaining,'| Epoch:', epoch, '| Batch Loss:', c, )
 
             saver.save(sess, "model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
@@ -108,6 +111,18 @@ def train_neural_network(x):
 
 train_neural_network(x)
 
+def estimated_time(count,oldtime):
+    time = datetime.datetime.now().time()
+    e1 = int(time.second)
+    e2 = int(oldtime.second)
+    timeDif = abs(e1-e2)
+    totalLeft = count-total_batches
+    estimate = timeDif*totalLeft
+    minutes = estimate / 60
+    if (minutes > 1):
+        estimate = minutes
+
+    return time, estimate
 
 def test_neural_network():
     prediction = neural_network_model(x)
