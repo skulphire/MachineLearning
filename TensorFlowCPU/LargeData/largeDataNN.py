@@ -12,7 +12,7 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 
-batch_size = 32
+batch_size = 400
 total_batches = int(1600000 / batch_size)
 hm_epochs = 10
 
