@@ -13,7 +13,7 @@ n_nodes_hl2 = 500
 n_classes = 2
 
 batch_size = 32
-total_batches = int(1048576 / batch_size) #1600000
+total_batches = int(1600000 / batch_size) #1600000
 hm_epochs = 10
 
 x = tf.placeholder('float')
@@ -91,7 +91,7 @@ def train_neural_network(x):
                         batch_x = []
                         batch_y = []
                         batches_run += 1
-                        print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
+                        print('Batch run:', batches_run, '/', total_batches, '| Batch_Size: ',batch_size,'| Epoch:', epoch, '| Batch Loss:', c, )
 
             saver.save(sess, "model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
