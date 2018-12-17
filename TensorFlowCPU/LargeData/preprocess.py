@@ -96,7 +96,7 @@ def convert_to_vec(fin, fout, lexicon_pickle):
         print(counter)
 
 
-convert_to_vec('test_set.csv', 'processed-test-set.csv', 'lexicon-2500-2638.pickle')
+convert_to_vec('test_set.csv', 'processed-test-set.csv', 'lexicon.pickle')
 
 
 def shuffle_data(fin):
