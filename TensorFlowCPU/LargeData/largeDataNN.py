@@ -108,9 +108,6 @@ def train_neural_network(x):
                 f.write(str(epoch) + '\n')
             epoch += 1
 
-
-train_neural_network(x)
-
 def estimated_time(count,oldtime):
     time = datetime.datetime.now().time()
     e1 = int(time.second)
@@ -121,8 +118,9 @@ def estimated_time(count,oldtime):
     minutes = estimate / 60
     if (minutes > 1):
         estimate = minutes
-
     return time, estimate
+
+train_neural_network(x)
 
 def test_neural_network():
     prediction = neural_network_model(x)
