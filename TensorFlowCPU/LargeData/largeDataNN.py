@@ -112,18 +112,20 @@ def estimated_time(count,oldtime):
     time = datetime.datetime.now().time()
     e1 = int(time.second)
     e2 = int(oldtime.second)
-    timeDif = e2-e1+1
-    totalLeft = abs(count-total_batches)
+    timeDif = e2-e1
+    if(timeDif < 1):
+        timeDif = 1
+    totalLeft = total_batches-count
     estimate = timeDif*totalLeft
     minutes = estimate / 60
     if (minutes > 1):
         estimate = minutes
-        w = "Minutes"
+        w = "M"
         if(estimate > 60):
             estimate = estimate/60
-            w = "Hours"
+            w = "H"
     else:
-        w = 'Seconds'
+        w = 'S'
     return time, estimate, w
 
 train_neural_network(x)
