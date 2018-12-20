@@ -62,7 +62,7 @@ def convNN(x):
     return output
 
 
-def train_neural_network(x, hm_epochs=2):
+def train_neural_network(x, hm_epochs=1):
     predicition = convNN(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=predicition, labels=y))
 
@@ -79,6 +79,7 @@ def train_neural_network(x, hm_epochs=2):
                     _, c = ses.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
                     epoch_loss += c
                 print('epoch ', epoch+1, 'completed out of', hm_epochs, ' loss:', epoch_loss)
+            ses.close()
 
         correct = tf.equal(tf.arg_max(predicition, 1), tf.arg_max(y, 1))
         accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
