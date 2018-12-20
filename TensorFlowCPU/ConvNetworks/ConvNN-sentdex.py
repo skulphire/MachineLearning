@@ -51,7 +51,7 @@ def convNN(x):
 
     return output
 
-def train_neural_network(x, hm_epochs=10):
+def train_neural_network(x, hm_epochs=1):
     predicition = convNN(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=predicition,labels=y))
 
