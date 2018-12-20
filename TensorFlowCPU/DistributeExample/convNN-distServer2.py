@@ -16,7 +16,7 @@ keep_prob = tf.placeholder(tf.float32)
 
 #distribute
 cluster = tf.train.ClusterSpec({'worker':['10.10.1.140:2222','10.10.1.141:2222']})
-server = tf.train.Server(cluster,task_index=1,start=False)
+server = tf.train.Server(cluster,task_index=1)
 worker1 = '/job:worker/task:0'
 worker2 = '/job:worker/task:1'
 
