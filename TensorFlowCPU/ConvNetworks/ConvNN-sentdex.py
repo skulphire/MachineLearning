@@ -33,11 +33,11 @@ def convNN(x):
     x = tf.reshape(x,shape=[-1,28,28,1])
 
     #1 layer
-    conv1 = conv2d(x,weights['W_conv1'])
+    conv1 = tf.nn.relu(conv2d(x,weights['W_conv1']) + biases['b_conv1'])
     conv1 = maxpool2d(conv1)
 
     #2 layer
-    conv2 = conv2d(conv1,weights['W_conv2'])
+    conv2 = tf.nn.relu(conv2d(conv1,weights['W_conv2']) + biases['b_conv2'])
     conv2 = maxpool2d(conv2)
 
     fc = tf.reshape(conv2,shape=[-1,7*7*64])
