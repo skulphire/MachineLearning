@@ -69,7 +69,7 @@ def train_neural_network(x, hm_epochs=2):
 
     with tf.train.MonitoredTrainingSession(master=server.target,is_chief=True) as ses:
         while not ses.should_stop():
-            ses.run(tf.global_variables_initializer())
+            #ses.run(tf.global_variables_initializer())
 
             for epoch in range(hm_epochs):
                 epoch_loss = 0
