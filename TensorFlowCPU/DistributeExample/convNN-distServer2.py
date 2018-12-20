@@ -46,19 +46,22 @@ def convNN(x):
         #1 layer
         conv1 = tf.nn.relu(conv2d(x,weights['W_conv1']) + biases['b_conv1'])
         conv1 = maxpool2d(conv1)
+        print("I am worker 1")
 
     with tf.device(worker2):
         #2 layer
         conv2 = tf.nn.relu(conv2d(conv1,weights['W_conv2']) + biases['b_conv2'])
         conv2 = maxpool2d(conv2)
+        print("I am worker 2")
 
-    fc = tf.reshape(conv2,shape=[-1,7*7*64])
-    fc = tf.nn.relu(tf.matmul(fc,weights['W_fc'])+biases['b_fc'])
+    with tf.device(worker2):
+        fc = tf.reshape(conv2,shape=[-1,7*7*64])
+        fc = tf.nn.relu(tf.matmul(fc,weights['W_fc'])+biases['b_fc'])
 
     #dropout will help with large data, helps with weights
     #fc = tf.nn.dropout(fc,keep_rate) #80% of neurons kept
-
-    output = tf.matmul(fc,weights['out'])+biases['out']
+    with tf.device(worker1):
+        output = tf.matmul(fc,weights['out'])+biases['out']
 
     return output
 
