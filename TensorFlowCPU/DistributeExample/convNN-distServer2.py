@@ -67,7 +67,7 @@ def train_neural_network(x, hm_epochs=10):
 
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    with tf.train.MonitoredTrainingSession(master="grpc://10.10.1.140:2222",is_chief=0) as ses:
+    with tf.train.MonitoredTrainingSession(master=server.target,is_chief=0) as ses:
         while not ses.should_stop():
             ses.run(tf.global_variables_initializer())
 
