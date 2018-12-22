@@ -36,34 +36,34 @@ def convNN(x):
     else:
         with tf.device(tf.train.replica_device_setter(worker_device=workerStr+taskNum,cluster=cluster)):
 
-        x = tf.reshape(x, shape=[-1, 28, 28, 1])
-        weights = {'W_conv1':tf.Variable(tf.random_normal([5,5,1,32])),
-                   'W_conv2':tf.Variable(tf.random_normal([5,5,32,64])),
-                   'W_fc':tf.Variable(tf.random_normal([7*7*64,1024])),
-                   'out':tf.Variable(tf.random_normal([1024,n_classes]))}
+            x = tf.reshape(x, shape=[-1, 28, 28, 1])
+            weights = {'W_conv1':tf.Variable(tf.random_normal([5,5,1,32])),
+                       'W_conv2':tf.Variable(tf.random_normal([5,5,32,64])),
+                       'W_fc':tf.Variable(tf.random_normal([7*7*64,1024])),
+                       'out':tf.Variable(tf.random_normal([1024,n_classes]))}
 
-        biases = {'b_conv1': tf.Variable(tf.random_normal([32])),
-                   'b_conv2': tf.Variable(tf.random_normal([64])),
-                   'b_fc': tf.Variable(tf.random_normal([1024])),
-                   'out': tf.Variable(tf.random_normal([n_classes]))}
+            biases = {'b_conv1': tf.Variable(tf.random_normal([32])),
+                       'b_conv2': tf.Variable(tf.random_normal([64])),
+                       'b_fc': tf.Variable(tf.random_normal([1024])),
+                       'out': tf.Variable(tf.random_normal([n_classes]))}
 
-        #1 layer
-        conv1 = tf.nn.relu(conv2d(x,weights['W_conv1']) + biases['b_conv1'])
-        conv1 = maxpool2d(conv1)
+            #1 layer
+            conv1 = tf.nn.relu(conv2d(x,weights['W_conv1']) + biases['b_conv1'])
+            conv1 = maxpool2d(conv1)
 
-        #2 layer
-        conv2 = tf.nn.relu(conv2d(conv1,weights['W_conv2']) + biases['b_conv2'])
-        conv2 = maxpool2d(conv2)
+            #2 layer
+            conv2 = tf.nn.relu(conv2d(conv1,weights['W_conv2']) + biases['b_conv2'])
+            conv2 = maxpool2d(conv2)
 
-        fc = tf.reshape(conv2,shape=[-1,7*7*64])
-        fc = tf.nn.relu(tf.matmul(fc,weights['W_fc'])+biases['b_fc'])
+            fc = tf.reshape(conv2,shape=[-1,7*7*64])
+            fc = tf.nn.relu(tf.matmul(fc,weights['W_fc'])+biases['b_fc'])
 
-        #dropout will help with large data, helps with weights
-        #fc = tf.nn.dropout(fc,keep_rate) #80% of neurons kept
+            #dropout will help with large data, helps with weights
+            #fc = tf.nn.dropout(fc,keep_rate) #80% of neurons kept
 
-        output = tf.matmul(fc,weights['out'])+biases['out']
+            output = tf.matmul(fc,weights['out'])+biases['out']
 
-        return output
+            return output
 
 def train_neural_network(x, hm_epochs=1):
     predicition = convNN(x)
