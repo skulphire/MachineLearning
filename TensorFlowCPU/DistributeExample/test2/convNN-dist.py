@@ -21,6 +21,7 @@ workerStr = '/job:worker/task:'
 psStr = '/job:ps/task:0'
 jobType = sys.argv[1]
 taskNum = sys.argv[2]
+taskNum = int(taskNum)
 server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum) #worker2
 
 
