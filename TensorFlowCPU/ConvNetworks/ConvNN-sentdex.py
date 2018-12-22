@@ -66,7 +66,7 @@ def train_neural_network(x, hm_epochs=1):
                 epoch_x, epoch_y = mnist.train.next_batch(batch_size)
                 _, c = ses.run([optimizer,cost],feed_dict={x:epoch_x,y:epoch_y})
                 epoch_loss+=c
-            print('epoch ',epoch, 'completed out of', hm_epochs, ' loss:',epoch_loss)
+            print('epoch ',epoch+1, 'completed out of', hm_epochs, ' loss:',epoch_loss)
 
         correct = tf.equal(tf.arg_max(predicition,1),tf.arg_max(y,1))
         accuracy = tf.reduce_mean(tf.cast(correct,'float'))
