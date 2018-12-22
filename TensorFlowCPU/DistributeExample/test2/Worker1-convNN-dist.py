@@ -29,6 +29,8 @@ def conv2d(x,W):
 def maxpool2d(x):
     return tf.nn.max_pool(x,ksize=[1,2,2,1],strides=[1,2,2,1],padding= 'SAME')
 
+print("workerstring: "+workerStr+str(taskNum))
+
 def convNN(x):
 
     if jobType == 'ps':
@@ -82,7 +84,7 @@ def train_neural_network(x, hm_epochs=1):
                 epoch_loss+=c
             print('epoch ',epoch+1, 'completed out of', hm_epochs, ' loss:',epoch_loss)
 
-        correct = tf.equal(tf.arg_max(predicition,1),tf.arg_max(y,1))
+        correct = tf.equal(tf.argmax(predicition,1),tf.argmax(y,1))
         accuracy = tf.reduce_mean(tf.cast(correct,'float'))
         print('Accuracy: ',accuracy.eval({x:mnist.test.images, y:mnist.test.labels}))
 
