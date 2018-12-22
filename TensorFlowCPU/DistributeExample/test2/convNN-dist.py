@@ -16,7 +16,7 @@ keep_rate = 0.8
 keep_prob = tf.placeholder(tf.float32)
 
 #distribute
-cluster = tf.train.ClusterSpec({'ps':['10.10.1.142:2221'],'worker':['10.10.1.140:2222','10.10.1.141:2223']})
+cluster = tf.train.ClusterSpec({'worker':['10.10.1.142:2221'],'ps':['10.10.1.140:2222','10.10.1.141:2223']})
 workerStr = '/job:worker/task:'
 psStr = '/job:ps/task:0'
 jobType = sys.argv[1]
