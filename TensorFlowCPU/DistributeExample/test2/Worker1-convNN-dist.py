@@ -34,7 +34,7 @@ def convNN(x):
     if jobType == 'ps':
         server.join()
     else:
-        with tf.device(tf.train.replica_device_setter(worker_device=workerStr+taskNum,cluster=cluster)):
+        with tf.device(tf.train.replica_device_setter(worker_device=workerStr+str(taskNum),cluster=cluster)):
 
             x = tf.reshape(x, shape=[-1, 28, 28, 1])
             weights = {'W_conv1':tf.Variable(tf.random_normal([5,5,1,32])),
