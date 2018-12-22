@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import pickle
+import sys
 
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
@@ -18,8 +19,8 @@ keep_prob = tf.placeholder(tf.float32)
 cluster = tf.train.ClusterSpec({'ps':['10.10.1.142:2221'],'worker':['10.10.1.140:2222','10.10.1.141:2223']})
 workerStr = '/job:worker/task:'
 ps1 = '/job:ps/task:0'
-jobType = 'ps'
-taskNum = 0
+jobType = sys.argv[1]
+taskNum = sys.argv[2]
 server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum) #ps0
 
 
