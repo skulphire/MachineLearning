@@ -84,7 +84,7 @@ def train_neural_network(x, hmEpochs=1):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction,labels=y))
     optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
     with tf.Session(server.target) as sess:
-        for epoch in hmEpochs:
+        for epoch in range(hmEpochs):
             epoch_loss = 1
             with open('lexicon.pickle', 'rb') as f:
                 lexicon = pickle.load(f)
