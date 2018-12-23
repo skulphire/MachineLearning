@@ -84,6 +84,7 @@ def train_neural_network(x, hmEpochs=1):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction,labels=y))
     optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
     with tf.Session(server.target) as sess:
+        sess.run(tf.global_variables_initializer())
         for epoch in range(hmEpochs):
             epoch_loss = 1
             with open('lexicon.pickle', 'rb') as f:
@@ -93,7 +94,7 @@ def train_neural_network(x, hmEpochs=1):
                 batch_y = []
                 batches_run = 0
                 oldtime = datetime.datetime.now()
-                for line in f:
+                for line in f: #1600000 lines
                     label = line.split(':::')[0]
                     tweet = line.split(':::')[1]
                     current_words = word_tokenize(tweet.lower())
