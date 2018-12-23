@@ -32,7 +32,7 @@ with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
     counter = 0
     for line in f:
         counter+=1
-    print("lines: "+counter)
+    print("lines: "+str(counter))
 
 def neural_network_model(data):
     if jobType == 'ps':
