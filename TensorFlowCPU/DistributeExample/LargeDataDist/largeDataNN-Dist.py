@@ -10,11 +10,11 @@ lemmatizer = WordNetLemmatizer()
 
 nclasses = 2 # 0=neg, 4=pos # 1 or 0 now
 
-batch_size = 32
-total_batches = 128
+batch_size = 256
+total_batches = int(1600000/batch_size)
 
-n_nodes_hl1 = 500
-n_nodes_hl2 = 500
+n_nodes_hl1 = 800
+n_nodes_hl2 = 800
 
 x = tf.placeholder('float')
 y = tf.placeholder('float')
@@ -28,11 +28,11 @@ taskNum = sys.argv[2]
 taskNum = int(taskNum)
 server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
 
-with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
-    counter = 0
-    for line in f:
-        counter+=1
-    print("lines: "+str(counter))
+# with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
+#     counter = 0
+#     for line in f:
+#         counter+=1
+#     print("lines: "+str(counter))
 
 def neural_network_model(data):
     if jobType == 'ps':
