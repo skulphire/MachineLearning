@@ -20,8 +20,8 @@ x = tf.placeholder('float')
 y = tf.placeholder('float')
 
 # distribution
-# 1 worker, 2 Ps
-cluster = tf.train.ClusterSpec({'worker':['10.10.1.142:2221'],'ps':['10.10.1.140:2222','10.10.1.141:2223']})
+# 2 worker, 1 Ps
+cluster = tf.train.ClusterSpec({'ps':['10.10.1.142:2221'],'worker':['10.10.1.140:2222','10.10.1.141:2222']})
 workerStr = '/job:worker/task:'
 jobType = sys.argv[1]
 taskNum = sys.argv[2]
