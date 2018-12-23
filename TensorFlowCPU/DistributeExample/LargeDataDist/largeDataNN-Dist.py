@@ -94,7 +94,9 @@ def train_neural_network(x, hmEpochs=1):
                 batch_y = []
                 batches_run = 0
                 oldtime = datetime.datetime.now()
+                linecount = 0
                 for line in f: #1600000 lines
+                    linecount+=1
                     label = line.split(':::')[0]
                     tweet = line.split(':::')[1]
                     current_words = word_tokenize(tweet.lower())
@@ -119,7 +121,7 @@ def train_neural_network(x, hmEpochs=1):
                         batches_run += 1
                         oldtime, remaining, w = estimated_time(batches_run, oldtime)
                         print('Batch run:', batches_run, '/', total_batches, '|', w, 'Remaining:', '%4.2f' % remaining,
-                              '| Epoch:', epoch+1, '| Batch Loss:', c, )
+                              '| Epoch:', epoch+1, '| Batch Loss:', c,'line: ',linecount )
 
 
 train_neural_network(x)
