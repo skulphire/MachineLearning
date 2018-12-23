@@ -21,7 +21,7 @@ x = tf.placeholder('float')
 y = tf.placeholder('float')
 
 hidden_1_layer = {'f_fum': n_nodes_hl1,
-                  'weight': tf.Variable(tf.random_normal([2638, n_nodes_hl1])),
+                  'weight': tf.Variable(tf.random_normal([2638, n_nodes_hl1])), # 2638 is the number of words in the lexicon
                   'bias': tf.Variable(tf.random_normal([n_nodes_hl1]))}
 
 hidden_2_layer = {'f_fum': n_nodes_hl2,
