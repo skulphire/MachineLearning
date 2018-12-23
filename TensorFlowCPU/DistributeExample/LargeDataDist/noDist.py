@@ -21,13 +21,13 @@ y = tf.placeholder('float')
 
 # distribution
 # 2 worker, 1 Ps
-cluster = tf.train.ClusterSpec({'ps':['10.10.1.142:2221'],'worker':['10.10.1.140:2222','10.10.1.141:2222']})
+#cluster = tf.train.ClusterSpec({'ps':['10.10.1.142:2221'],'worker':['10.10.1.140:2222','10.10.1.141:2222']})
 workerStr = '/job:worker/task:'
-jobType = sys.argv[1]
+#jobType = sys.argv[1]
 jobType = 'we'
 taskNum = sys.argv[2]
 taskNum = int(taskNum)
-server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
+#server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
 
 # with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
 #     counter = 0
@@ -38,28 +38,28 @@ server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
 def neural_network_model(data):
     if jobType == 'ps':
         print('ps')
-        server.join()
+        # server.join()
     else:
-        with tf.device(tf.train.replica_device_setter(worker_device=workerStr+str(taskNum),cluster=cluster)):
-            hidden_1_layer = {'f_fum': n_nodes_hl1,
-                              'weight': tf.Variable(tf.random_normal([2638, n_nodes_hl1])),
-                              # 2638 is the number of words in the lexicon
-                              'bias': tf.Variable(tf.random_normal([n_nodes_hl1]))}
+        #with tf.device(tf.train.replica_device_setter(worker_device=workerStr+str(taskNum),cluster=cluster)):
+        hidden_1_layer = {'f_fum': n_nodes_hl1,
+                          'weight': tf.Variable(tf.random_normal([2638, n_nodes_hl1])),
+                          # 2638 is the number of words in the lexicon
+                          'bias': tf.Variable(tf.random_normal([n_nodes_hl1]))}
 
-            hidden_2_layer = {'f_fum': n_nodes_hl2,
-                              'weight': tf.Variable(tf.random_normal([n_nodes_hl1, n_nodes_hl2])),
-                              'bias': tf.Variable(tf.random_normal([n_nodes_hl2]))}
+        hidden_2_layer = {'f_fum': n_nodes_hl2,
+                          'weight': tf.Variable(tf.random_normal([n_nodes_hl1, n_nodes_hl2])),
+                          'bias': tf.Variable(tf.random_normal([n_nodes_hl2]))}
 
-            output_layer = {'f_fum': None,
-                            'weight': tf.Variable(tf.random_normal([n_nodes_hl2, nclasses])),
-                            'bias': tf.Variable(tf.random_normal([nclasses]))}
+        output_layer = {'f_fum': None,
+                        'weight': tf.Variable(tf.random_normal([n_nodes_hl2, nclasses])),
+                        'bias': tf.Variable(tf.random_normal([nclasses]))}
 
-            l1 = tf.add(tf.matmul(data, hidden_1_layer['weight']), hidden_1_layer['bias'])
-            l1 = tf.nn.relu(l1)
-            l2 = tf.add(tf.matmul(l1, hidden_2_layer['weight']), hidden_2_layer['bias'])
-            l2 = tf.nn.relu(l2)
-            output = tf.matmul(l2, output_layer['weight']) + output_layer['bias']
-            return output
+        l1 = tf.add(tf.matmul(data, hidden_1_layer['weight']), hidden_1_layer['bias'])
+        l1 = tf.nn.relu(l1)
+        l2 = tf.add(tf.matmul(l1, hidden_2_layer['weight']), hidden_2_layer['bias'])
+        l2 = tf.nn.relu(l2)
+        output = tf.matmul(l2, output_layer['weight']) + output_layer['bias']
+        return output
 
 def estimated_time(count,oldtime):
     time = datetime.datetime.now().time()
@@ -85,7 +85,7 @@ def train_neural_network(x, hmEpochs=1):
     prediction = neural_network_model(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction,labels=y))
     optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
-    with tf.Session(server.target,config=tf.ConfigProto(intra_op_parallelism_threads=8)) as sess:
+    with tf.Session() as sess:#server.target,config=tf.ConfigProto(intra_op_parallelism_threads=8)) as sess:
         sess.run(tf.global_variables_initializer())
         for epoch in range(hmEpochs):
             epoch_loss = 1
