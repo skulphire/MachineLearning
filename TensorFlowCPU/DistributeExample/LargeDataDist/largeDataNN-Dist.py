@@ -24,7 +24,6 @@ y = tf.placeholder('float')
 cluster = tf.train.ClusterSpec({'ps':['10.10.1.142:2221'],'worker':['10.10.1.140:2222','10.10.1.141:2222']})
 workerStr = '/job:worker/task:'
 jobType = sys.argv[1]
-jobType = 'we'
 taskNum = sys.argv[2]
 taskNum = int(taskNum)
 server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
