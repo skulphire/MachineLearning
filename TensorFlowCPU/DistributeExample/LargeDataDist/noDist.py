@@ -27,6 +27,9 @@ workerStr = '/job:worker/task:'
 jobType = 'we'
 taskNum = sys.argv[2]
 taskNum = int(taskNum)
+if len(sys.argv) == 4:
+    cmdEpochs = sys.argv[3]
+
 #server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
 
 # with open('train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
@@ -127,7 +130,7 @@ def train_neural_network(x, hmEpochs=1):
 
 
 
-train_neural_network(x)
+train_neural_network(x, cmdEpochs)
 
 def test_neural_network():
     prediction = neural_network_model(x)
@@ -163,7 +166,7 @@ def useNN():
     print("use the nn\n")
     data = "eee"
     while not data == '0':
-        data = input("Enter phrases or 0 for exit")
+        data = input("Enter phrases or 0 for exit> ")
         prediction = neural_network_model(x)
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
