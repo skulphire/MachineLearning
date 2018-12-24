@@ -186,3 +186,5 @@ def useNN():
                 print('Positive:', data)
             elif result[0] == 1:
                 print('Negative:', data)
+
+useNN()
