@@ -28,7 +28,8 @@ jobType = 'we'
 taskNum = sys.argv[2]
 taskNum = int(taskNum)
 if len(sys.argv) == 4:
-    cmdEpochs = sys.argv[3]
+    cmdEpochs = int(sys.argv[3])
+    print("epochs: ",cmdEpochs)
 
 #server = tf.train.Server(cluster,job_name=jobType,task_index=taskNum)
 
