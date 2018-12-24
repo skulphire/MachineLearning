@@ -10,7 +10,7 @@ lemmatizer = WordNetLemmatizer()
 
 nclasses = 2 # 0=neg, 4=pos # 1 or 0 now
 
-batch_size = 256*4
+batch_size = 256*6
 total_batches = int(1600000/batch_size)
 
 n_nodes_hl1 = 800
