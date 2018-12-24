@@ -164,7 +164,7 @@ def useNN():
     data = "eee"
     while not data == '0':
         data = input("Enter phrases or 0 for exit")
-        prediction = neural_network_model(data)
+        prediction = neural_network_model(x)
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
 
